@@ -30,4 +30,18 @@
       }
     }
   }
+
+  @each $screen-size, $size-map in $letter-spacing-group {
+    @if $screen-size == small {
+      @each $size-name, $size-value in $size-map {
+        --ls-#{$size-name}: #{$size-value};
+      }
+    } @else {
+      @include mq($screen-size) {
+        @each $size-name, $size-value in $size-map {
+          --ls-#{$size-name}: #{$size-value};
+        }
+      }
+    }
+  }
 }
