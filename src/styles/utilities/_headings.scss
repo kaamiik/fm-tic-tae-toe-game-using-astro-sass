@@ -1,20 +1,45 @@
-@use '../abstracts/' as *;
+@use "../abstracts/" as *;
 
-.heading-1 {
+.heading-1-x {
   @include heading(
     $heading-1-font-size,
-    $heading-1-color
+    $heading-1-letter-spacing,
+    $heading-1-color-x
   );
 }
+.heading-1-o {
+  @include heading(
+    $heading-1-font-size,
+    $heading-1-letter-spacing,
+    $heading-1-color-o
+  );
+}
+.heading-1-restart {
+  @include heading(
+    $heading-1-font-size,
+    $heading-1-letter-spacing,
+    $heading-1-color-restart
+  );
+}
+
 .heading-2 {
   @include heading(
     $heading-2-font-size,
-    $heading-2-color
+    $heading-2-letter-spacing,
+    $heading-color-default
   );
 }
 .heading-3 {
   @include heading(
     $heading-3-font-size,
+    $heading-3-letter-spacing,
     $heading-3-color
+  );
+}
+.heading-4 {
+  @include heading(
+    $heading-4-font-size,
+    $heading-4-letter-spacing,
+    $heading-4-color
   );
 }
