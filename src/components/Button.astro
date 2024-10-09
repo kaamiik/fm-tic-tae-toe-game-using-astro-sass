@@ -1,10 +1,12 @@
 ---
-const { href, theme = "default" } = Astro.props;
+const { href, theme = "primary", themeNumber = "one" } = Astro.props;
 let El = "button";
 if (href) El = "a";
+
+const buttonClasses = `button button--${theme} button--${theme}-${themeNumber}`;
 ---
 
-<El class="button" {href} data-type={theme}>
+<El class={buttonClasses} {href}>
   <slot />
 </El>
 
@@ -18,32 +20,67 @@ if (href) El = "a";
     text-decoration: none;
     line-height: 1;
     font-family: $button-font-family;
-    font-size: $button-font-size;
     text-transform: $button-text-transform;
     font-weight: $button-font-weight;
     padding: $button-padding;
     border: $button-border;
-    border-radius: $button-border-radius;
     transition: 275ms ease;
+  }
 
-    &[data-type="primary"] {
-      background-color: $button-primary-background;
-      color: $button-primary-color;
+  // Primary button base styles
+  .button--primary {
+    width: 100%;
+    color: $button-primary-color;
+    font-size: $button-font-size-primary;
+  }
 
-      &:is(:hover, :focus) {
-        background-color: $button-primary-background-hover;
-        color: $button-primary-color-hover;
-      }
+  // Secondary button base styles
+  .button--secondary {
+    color: $button-secondary-color;
+    font-size: $button-font-size-secondary;
+  }
+
+  // Specific styles for primary-one
+  .button--primary-one {
+    background-color: $button-primary-one-background;
+    box-shadow: $box-shadow-4;
+    border-radius: $border-radius-2;
+
+    &:is(:hover, :focus) {
+      background-color: $button-primary-one-background-hover;
     }
+  }
 
-    &[data-type="accent"] {
-      background-color: $button-accent-background;
-      color: $button-accent-color;
+  // Specific styles for primary-two
+  .button--primary-two {
+    background-color: $button-primary-two-background;
+    box-shadow: $box-shadow-2;
+    border-radius: $border-radius-2;
 
-      &:is(:hover, :focus) {
-        background-color: $button-accent-background-hover;
-        color: $button-accent-color-hover;
-      }
+    &:is(:hover, :focus) {
+      background-color: $button-primary-two-background-hover;
+    }
+  }
+
+  // Specific styles for secondary-one
+  .button--secondary-one {
+    background-color: $button-secondary-one-background;
+    box-shadow: $box-shadow-3;
+    border-radius: $border-radius-1;
+
+    &:is(:hover, :focus) {
+      background-color: $button-secondary-one-background-hover;
+    }
+  }
+
+  // Specific styles for secondary-two
+  .button--secondary-two {
+    background-color: $button-secondary-two-background;
+    box-shadow: $box-shadow-5;
+    border-radius: $border-radius-1;
+
+    &:is(:hover, :focus) {
+      background-color: $button-secondary-two-background-hover;
     }
   }
 </style>
