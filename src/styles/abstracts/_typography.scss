@@ -19,13 +19,35 @@ $font-sizes: (
     "400": $-fs-body,
     "300": $-fs-body-small,
   ),
-  "large": (
+  "medium": (
     "900": $-fs-heading-large,
     "800": $-fs-heading-medium,
     "700": $-fs-heading-small,
     "600": $-fs-heading-extra-small,
     "500": $-fs-heading-extra-small,
-    "400": $-fs-body "300": $-fs-body,
+    "400": $-fs-body,
+    "300": $-fs-body,
+  ),
+);
+
+$letter-spacing-group: (
+  "small": (
+    "900": 1.5px,
+    "800": 1.25px,
+    "700": 1px,
+    "600": 1px,
+    "500": 0.88px,
+    "400": 0.88px,
+    "300": 0.75px,
+  ),
+  "medium": (
+    "900": 2.5px,
+    "800": 1.5px,
+    "700": 1.25px,
+    "600": 1px,
+    "500": 1px,
+    "400": 0.88px,
+    "300": 0.88px,
   ),
 );
 
@@ -36,6 +58,14 @@ $font-size-600: var(--fs-600);
 $font-size-700: var(--fs-700);
 $font-size-800: var(--fs-800);
 $font-size-900: var(--fs-900);
+
+$letter-spacing-300: var(--ls-300);
+$letter-spacing-400: var(--ls-400);
+$letter-spacing-500: var(--ls-500);
+$letter-spacing-600: var(--ls-600);
+$letter-spacing-700: var(--ls-700);
+$letter-spacing-800: var(--ls-800);
+$letter-spacing-900: var(--ls-900);
 
 $-fw-500: 500;
 $-fw-700: 700;
