@@ -1,0 +1,34 @@
+---
+import Icons from "../components/Icons.astro";
+import PlayerMarkPicker from "../components/PlayerMarkPicker.astro";
+import Button from "../components/Button.astro";
+---
+
+<div class="new-game">
+  <h1 class="visually-hidden">Tic Tae Toe Game</h1>
+
+  <Icons />
+
+  <PlayerMarkPicker />
+
+  <div class="new-game__buttons">
+    <Button theme="primary" themeNumber="one">New Game (vs CPU)</Button>
+    <Button theme="primary" themeNumber="two">New Game (vs player)</Button>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/abstracts/" as *;
+
+  .new-game {
+    display: flex;
+    flex-direction: column;
+    gap: $size-8;
+
+    &__buttons {
+      display: flex;
+      flex-direction: column;
+      gap: $size-5;
+    }
+  }
+</style>
