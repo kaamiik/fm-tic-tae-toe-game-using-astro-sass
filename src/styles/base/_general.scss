@@ -7,7 +7,16 @@ body {
   color: $body-text-color;
   background-color: $body-background-color;
   line-height: $body-line-height;
+  letter-spacing: $letter-spacing-400;
   text-transform: $body-text-transform;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+main {
+  margin-block: $size-6;
 }
 
 a {
