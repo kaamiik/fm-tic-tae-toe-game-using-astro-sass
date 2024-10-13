@@ -1,7 +1,14 @@
 ---
 import Layout from "../layouts/BaseLayout.astro";
+import NewGameSection from "../components/NewGameSection.astro";
+import Game from "../components/Game.astro";
 ---
 
 <Layout title="Frontend Mentor | Tic Tac Toe">
-  <div class="container flow"></div>
+  <NewGameSection />
+  <Game />
 </Layout>
+
+<style lang="scss">
+  @use "../styles/abstracts/" as *;
+</style>
