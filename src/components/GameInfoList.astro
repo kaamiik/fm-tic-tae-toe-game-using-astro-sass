@@ -1,0 +1,21 @@
+---
+import GameInfo from "./GameInfo.astro";
+---
+
+<div class="game__info--wrapper">
+  <GameInfo type="x" label="X (You)" score="0" />
+  <GameInfo type="ties" label="Ties" score="0" />
+  <GameInfo type="o" label="O (CPU)" score="0" />
+</div>
+
+<style lang="scss">
+  @use "../styles/abstracts/" as *;
+
+  .game {
+    &__info--wrapper {
+      display: flex;
+      justify-content: space-between;
+      gap: $size-5;
+    }
+  }
+</style>
