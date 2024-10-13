@@ -1,0 +1,40 @@
+---
+
+---
+
+<div class="game__turn">
+  <p class="game__turn--text | heading-4">
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      width="16"
+      height="16"
+      viewBox="0 0 64 64"
+      xmlns="http://www.w3.org/2000/svg"
+      ><path
+        d="M15.002 1.147 32 18.145 48.998 1.147a3 3 0 0 1 4.243 0l9.612 9.612a3 3 0 0 1 0 4.243L45.855 32l16.998 16.998a3 3 0 0 1 0 4.243l-9.612 9.612a3 3 0 0 1-4.243 0L32 45.855 15.002 62.853a3 3 0 0 1-4.243 0L1.147 53.24a3 3 0 0 1 0-4.243L18.145 32 1.147 15.002a3 3 0 0 1 0-4.243l9.612-9.612a3 3 0 0 1 4.243 0Z"
+        fill="#A8BFC9"
+        fill-rule="evenodd"></path></svg
+    >
+    turn
+  </p>
+</div>
+
+<style lang="scss">
+  @use "../styles/abstracts/" as *;
+
+  .game {
+    &__turn {
+      background-color: $color-neutral-800;
+      border-radius: 5px;
+      box-shadow: $box-shadow-6;
+      width: fit-content;
+      padding: 9px 15px 4px;
+
+      &--text {
+        display: inline-flex;
+        gap: 9px;
+      }
+    }
+  }
+</style>
