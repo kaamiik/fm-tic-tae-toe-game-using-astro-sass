@@ -1,9 +1,14 @@
 ---
-const { href, theme = "primary", themeNumber = "one" } = Astro.props;
+const {
+  href,
+  theme = "primary",
+  themeNumber = "one",
+  customJsClass = "",
+} = Astro.props;
 let El = "button";
 if (href) El = "a";
 
-const buttonClasses = `button button--${theme} button--${theme}-${themeNumber}`;
+const buttonClasses = `button button--${theme} button--${theme}-${themeNumber} ${customJsClass}`;
 ---
 
 <El type="button" class={buttonClasses} {href}>
