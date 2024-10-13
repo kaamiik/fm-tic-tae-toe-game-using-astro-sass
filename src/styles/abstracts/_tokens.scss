@@ -19,6 +19,7 @@ $box-shadow-2: 0 8px 0 rgb(204, 139, 19);
 $box-shadow-3: 0 4px 0 rgb(204, 139, 19);
 $box-shadow-4: 0 8px 0 rgb(17, 140, 135);
 $box-shadow-5: 0 4px 0 rgb(107, 137, 151);
+$box-shadow-6: 0 4px 0 rgb(16, 33, 42);
 
 // body
 $body-font-family: $font-family-base;
@@ -35,7 +36,7 @@ $link-color-hover: $color-text-interactive-hover;
 $heading-font-family: $font-family-base;
 $heading-color-default: $color-neutral-900;
 $heading-font-weight: $font-weight-bold;
-$heading-line-height: 1;
+$heading-line-height: 1.1;
 $heading-text-transform: uppercase;
 
 $heading-1-font-size: $font-size-900;
@@ -64,48 +65,13 @@ $container-max-width: 28.75rem;
 // $container-max-width-narrow: 40rem;
 // $container-max-width-wide: 75rem;
 
-// site header
-// $site-header-background-color: $color-primary-300;
-// $site-header-color: $color-neutral-900;
-// $site-header-padding: $size-8 0;
-// $site-header-margin: 0;
-// $site-header-jusitifcation-small-screens: center;
-// $site-header-jusitifcation-large-screens: space-between;
-// $site-header-alignment: center;
-
-// // skip navigation
-// $skip-nav-color: $color-neutral-100;
-// $skip-nav-background-color: $color-primary-500;
-// $skip-nav-padding: $size-4 $size-8;
-// $skip-nav-outline-color: $color-accent-400;
-// $skip-nav-outline-size: 2px;
-// $skip-nav-outline-offset: 3px;
-// $skip-nav-position: center;
-
-//navigation
-// $navigation-color: $site-header-color;
-// $navigation-color-hover: $color-accent-700;
-// $navigation-font-size: $font-size-400;
-// $navigation-gap: $size-9;
-// $navigation-link-text-decoration: none;
-// $navigation-font-family: $body-font-family;
-// $navigation-font-weight: $body-font-weight;
-
-// site footer
-// $footer-background-color: $color-primary-300;
-// $footer-text-color: $color-primary-900;
-// $footer-link-color: $color-neutral-100;
-// $footer-link-color-hover: $color-primary-200;
-// $footer-link-font-family: $font-family-accent;
-// $footer-link-text-decoration: none;
-
 // buttons
 $button-font-family: $body-font-family;
 $button-font-size-primary: $font-size-700;
 $button-font-size-secondary: $font-size-600;
 $button-font-weight: $font-weight-bold;
 $button-text-transform: uppercase;
-$button-padding: 1em;
+$button-padding: $size-4;
 $button-border: 0;
 $button-border-radius: $border-radius-1;
 
