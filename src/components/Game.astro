@@ -1,0 +1,106 @@
+---
+const { hidden = true } = Astro.props;
+const className = `js-game ${hidden ? "hidden" : ""}`;
+
+import Icons from "./Icons.astro";
+import GameTurn from "./GameTurn.astro";
+import Button from "./Button.astro";
+import GamePlay from "./GamePlay.astro";
+import GameInfoList from "./GameInfoList.astro";
+---
+
+<div class="container">
+  <div class={className}>
+    <div class="game__header">
+      <Icons />
+      <GameTurn />
+      <Button theme="secondary" themeNumber="two" customJsClass="js-restart">
+        <span class="visually-hidden">Restart the game</span>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 22 22"
+          xmlns="http://www.w3.org/2000/svg"
+          ><path
+            d="M19.524 0h-1.88a.476.476 0 0 0-.476.499l.159 3.284A9.81 9.81 0 0 0 9.835.317C4.415.317-.004 4.743 0 10.167.004 15.597 4.406 20 9.835 20a9.796 9.796 0 0 0 6.59-2.536.476.476 0 0 0 .019-.692l-1.348-1.349a.476.476 0 0 0-.65-.022 6.976 6.976 0 0 1-9.85-.63 6.987 6.987 0 0 1 .63-9.857 6.976 6.976 0 0 1 10.403 1.348l-4.027-.193a.476.476 0 0 0-.498.476v1.881c0 .263.213.476.476.476h7.944A.476.476 0 0 0 20 8.426V.476A.476.476 0 0 0 19.524 0Z"
+            fill="#1F3641"></path></svg
+        >
+      </Button>
+    </div>
+
+    <div class="game__main">
+      <GamePlay />
+      <GameInfoList />
+    </div>
+  </div>
+</div>
+<dialog class="dialog-restart js-dialog-restart">
+  <p class="heading-1-restart text-center">Restart game?</p>
+  <div class="dialog-restart__buttons">
+    <Button
+      theme="secondary"
+      themeNumber="two"
+      customJsClass="js-cancel-restart">No, cancel</Button
+    >
+    <Button
+      theme="secondary"
+      themeNumber="one"
+      customJsClass="js-confirm-restart">Yes, restart</Button
+    >
+  </div>
+</dialog>
+
+<style lang="scss">
+  @use "../styles/abstracts/" as *;
+  @use "sass:color";
+
+  .game {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: $size-5;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: auto;
+
+      @include mq(medium) {
+        margin-bottom: revert;
+      }
+    }
+
+    &__main {
+      display: flex;
+      flex-direction: column;
+      gap: $size-5;
+      margin-bottom: auto;
+
+      @include mq(medium) {
+        margin-bottom: revert;
+      }
+    }
+  }
+
+  .dialog-restart {
+    border: 0;
+    background-color: $color-neutral-800;
+    max-width: 100%;
+    padding: 4.1875rem 0;
+    width: 100%;
+
+    &::backdrop {
+      background-color: #000000;
+      opacity: 50%;
+    }
+
+    &__buttons {
+      margin-block-start: $size-8;
+      display: flex;
+      gap: $size-4;
+      justify-content: center;
+    }
+  }
+</style>
