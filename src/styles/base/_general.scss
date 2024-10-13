@@ -12,11 +12,13 @@ body {
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 main {
   margin-block: $size-6;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
