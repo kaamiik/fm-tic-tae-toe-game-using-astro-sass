@@ -1,19 +1,30 @@
 ---
+const { hidden = false } = Astro.props;
+const className = `new-game js-new-game ${hidden ? "hidden" : ""}`;
+
 import Icons from "../components/Icons.astro";
 import PlayerMarkPicker from "../components/PlayerMarkPicker.astro";
 import Button from "../components/Button.astro";
 ---
 
-<div class="new-game">
-  <h1 class="visually-hidden">Tic Tae Toe Game</h1>
+<div class="container">
+  <div class={className}>
+    <h1 class="visually-hidden">Tic Tae Toe Game</h1>
 
-  <Icons />
+    <Icons />
 
-  <PlayerMarkPicker />
+    <PlayerMarkPicker />
 
-  <div class="new-game__buttons">
-    <Button theme="primary" themeNumber="one">New Game (vs CPU)</Button>
-    <Button theme="primary" themeNumber="two">New Game (vs player)</Button>
+    <div class="new-game__buttons">
+      <Button theme="primary" themeNumber="one" customJsClass="js-play-vs-cpu"
+        >New Game (vs CPU)</Button
+      >
+      <Button
+        theme="primary"
+        themeNumber="two"
+        customJsClass="js-play-vs-player">New Game (vs player)</Button
+      >
+    </div>
   </div>
 </div>
 
@@ -21,8 +32,10 @@ import Button from "../components/Button.astro";
   @use "../styles/abstracts/" as *;
 
   .new-game {
+    flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: $size-8;
 
     &__buttons {
