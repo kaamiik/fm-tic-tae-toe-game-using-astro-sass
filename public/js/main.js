@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const playMultiPlayer = document.querySelector(".js-play-vs-player");
   const gameSection = document.querySelector(".js-game");
   const newGameSection = document.querySelector(".js-new-game");
+  const gameTurn = document.querySelector(".js-game-turn-text");
   const restartGameButton = document.querySelector(".js-restart");
   const oWinsDialog = document.querySelector(".js-dialog-o-wins");
   const oWinsYourResult = document.querySelector(".js-dialog-o-your-result");
@@ -23,6 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const playerXScore = document.querySelector(".js-player-x-score");
   const playerOScore = document.querySelector(".js-player-o-score");
   const numberOfTies = document.querySelector(".js-ties-count");
+  const screenReaderClickButton = document.querySelector(".js-sr-click-button");
+  const dialogScreenReader = Array.from(
+    document.querySelectorAll(".js-dialog-sr")
+  );
 
   // Game States
   let currentPlayer = "X";
@@ -45,10 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
 
   function startGame(mode) {
-    gameSection.classList.add("game");
-    gameSection.classList.remove("hidden");
-    newGameSection.classList.add("hidden");
-    newGameSection.classList.remove("new-game");
+    gameSection.parentElement.classList.remove("hidden");
+    newGameSection.parentElement.classList.add("hidden");
     pageHeading.textContent = mode;
     pageHeading.focus();
   }
@@ -58,10 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
     oWinsDialog.close();
     xWinsDialog.close();
     tiesDialog.close();
-    gameSection.classList.remove("game");
-    gameSection.classList.add("hidden");
-    newGameSection.classList.add("new-game");
-    newGameSection.classList.remove("hidden");
+    gameSection.parentElement.classList.add("hidden");
+    newGameSection.parentElement.classList.remove("hidden");
     pageHeading.textContent =
       "Game Setup: You can Choose Your Side and Opponent";
     pageHeading.focus();
@@ -71,6 +72,21 @@ document.addEventListener("DOMContentLoaded", function () {
   function resetGame() {
     currentPlayer = "X";
     gameOver = false;
+    gameTurn.innerHTML = `
+      <svg
+      aria-hidden="true"
+      focusable="false"
+      width="16"
+      height="16"
+      viewBox="0 0 64 64"
+      xmlns="http://www.w3.org/2000/svg"
+      ><path
+        d="M15.002 1.147 32 18.145 48.998 1.147a3 3 0 0 1 4.243 0l9.612 9.612a3 3 0 0 1 0 4.243L45.855 32l16.998 16.998a3 3 0 0 1 0 4.243l-9.612 9.612a3 3 0 0 1-4.243 0L32 45.855 15.002 62.853a3 3 0 0 1-4.243 0L1.147 53.24a3 3 0 0 1 0-4.243L18.145 32 1.147 15.002a3 3 0 0 1 0-4.243l9.612-9.612a3 3 0 0 1 4.243 0Z"
+        fill="#A8BFC9"
+        fill-rule="evenodd"></path></svg
+    >
+    turn
+    `;
     gameButtons.forEach((button) => {
       button.innerHTML = "";
       button.setAttribute("data-player", "");
@@ -82,6 +98,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function toggleTurn() {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+    if (currentPlayer === "X") {
+      gameTurn.innerHTML = `
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          width="16"
+          height="16"
+          viewBox="0 0 64 64"
+          xmlns="http://www.w3.org/2000/svg"
+          ><path
+            d="M15.002 1.147 32 18.145 48.998 1.147a3 3 0 0 1 4.243 0l9.612 9.612a3 3 0 0 1 0 4.243L45.855 32l16.998 16.998a3 3 0 0 1 0 4.243l-9.612 9.612a3 3 0 0 1-4.243 0L32 45.855 15.002 62.853a3 3 0 0 1-4.243 0L1.147 53.24a3 3 0 0 1 0-4.243L18.145 32 1.147 15.002a3 3 0 0 1 0-4.243l9.612-9.612a3 3 0 0 1 4.243 0Z"
+            fill="#A8BFC9"
+            fill-rule="evenodd">
+          </path>
+        </svg>
+        turn
+      `;
+    } else {
+      gameTurn.innerHTML = `
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          width="16"
+          height="16"
+          viewBox="0 0 64 64"
+          xmlns="http://www.w3.org/2000/svg"
+          ><path
+            d="M32 0c17.673 0 32 14.327 32 32 0 17.673-14.327 32-32 32C14.327 64 0 49.673 0 32 0 14.327 14.327 0 32 0Zm0 18.963c-7.2 0-13.037 5.837-13.037 13.037 0 7.2 5.837 13.037 13.037 13.037 7.2 0 13.037-5.837 13.037-13.037 0-7.2-5.837-13.037-13.037-13.037Z"
+            fill="#A8BFC9">
+          </path>
+        </svg>
+        turn
+      `;
+    }
     gameButtons.forEach((button) => {
       if (button.getAttribute("data-player") === "") {
         button.classList.remove("x--turn", "o--turn");
@@ -138,17 +189,33 @@ document.addEventListener("DOMContentLoaded", function () {
         if (winner === "X") {
           xWinsDialog.showModal();
           xWinsYourResult.textContent = "You won!";
+          // Say the results for screen readers
+          dialogScreenReader[1].innerHTML = `The result is ${
+            xScore + 1
+          } for x and ${oScore} for o. Number of ties is ${tieScore}`;
         } else {
           oWinsDialog.showModal();
           oWinsYourResult.textContent = "Oh no, You lost ...";
+          // Say the results for screen readers
+          dialogScreenReader[0].innerHTML = `The result is ${xScore} for x and ${
+            oScore + 1
+          } for o. Number of ties is ${tieScore}`;
         }
       } else {
         if (winner === "O") {
           oWinsDialog.showModal();
           oWinsYourResult.textContent = "You won!";
+          // Say the results for screen readers
+          dialogScreenReader[0].innerHTML = `The result is ${xScore} for x and ${
+            oScore + 1
+          } for o. Number of ties is ${tieScore}`;
         } else {
           xWinsDialog.showModal();
           xWinsYourResult.textContent = "Oh no, You lost ...";
+          // Say the results for screen readers
+          dialogScreenReader[1].innerHTML = `The result is ${
+            xScore + 1
+          } for x and ${oScore} for o. Number of ties is ${tieScore}`;
         }
       }
     } else {
@@ -156,17 +223,33 @@ document.addEventListener("DOMContentLoaded", function () {
         if (winner === "X") {
           xWinsDialog.showModal();
           xWinsYourResult.textContent = "Player 1 wins!";
+          // Say the results for screen readers
+          dialogScreenReader[1].innerHTML = `The result is ${
+            xScore + 1
+          } for x and ${oScore} for o. Number of ties is ${tieScore}`;
         } else {
           oWinsDialog.showModal();
           oWinsYourResult.textContent = "Player 2 wins!";
+          // Say the results for screen readers
+          dialogScreenReader[0].innerHTML = `The result is ${xScore} for x and ${
+            oScore + 1
+          } for o. Number of ties is ${tieScore}`;
         }
       } else {
         if (winner === "X") {
           xWinsDialog.showModal();
           xWinsYourResult.textContent = "Player 2 wins!";
+          // Say the results for screen readers
+          dialogScreenReader[1].innerHTML = `The result is ${
+            xScore + 1
+          } for x and ${oScore} for o. Number of ties is ${tieScore}`;
         } else {
           oWinsDialog.showModal();
           oWinsYourResult.textContent = "Player 1 wins!";
+          // Say the results for screen readers
+          dialogScreenReader[0].innerHTML = `The result is ${xScore} for x and ${
+            oScore + 1
+          } for o. Number of ties is ${tieScore}`;
         }
       }
     }
@@ -187,6 +270,7 @@ document.addEventListener("DOMContentLoaded", function () {
     gameOver = true;
     tiesDialog.showModal();
     updateScores("tie");
+    dialogScreenReader[2].innerHTML = `The result is ${xScore} for x and ${oScore} for o. Number of ties is ${tieScore}`;
   }
 
   function handleButtonClick(gameButton) {
@@ -200,6 +284,9 @@ document.addEventListener("DOMContentLoaded", function () {
     gameButton.classList.remove("empty");
     gameButton.classList.add("fill");
     gameButton.setAttribute("disabled", true);
+    let gameButtonLabel = gameButton.getAttribute("aria-label");
+    let turn = currentPlayer === "X" ? "player o turn" : "player x turn";
+    screenReaderClickButton.innerHTML = `${gameButtonLabel} filled for ${currentPlayer}. Now ${turn}`;
 
     if (checkWin(currentPlayer)) {
       handleWin(currentPlayer);
@@ -239,7 +326,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
       }
-    }, 500);
+    }, 1000);
   }
 
   function attachListeners() {
@@ -254,7 +341,7 @@ document.addEventListener("DOMContentLoaded", function () {
   attachListeners();
 
   playVsCPUBtn.addEventListener("click", function () {
-    startGame("Play solo game");
+    startGame("Play solo game - x turn");
     playerXScore.textContent = "0";
     playerOScore.textContent = "0";
     numberOfTies.textContent = "0";
@@ -273,7 +360,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   playMultiPlayer.addEventListener("click", function () {
-    startGame("Play vs Player");
+    startGame("Play vs Player - x turn");
     resetGame();
     xScore = 0;
     oScore = 0;
