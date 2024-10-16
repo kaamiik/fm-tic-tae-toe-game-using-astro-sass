@@ -1,13 +1,30 @@
 ---
 const turns = Array(9).fill("x--turn");
+const labels = [
+  "Top left",
+  "Top center",
+  "Top right",
+  "Middle left",
+  "Middle center",
+  "Middle right",
+  "Bottom left",
+  "Bottom center",
+  "Bottom right",
+];
 ---
 
 <div class="game__play">
   {
-    turns.map((turn) => (
-      <button class={`game__play--btn ${turn}`} type="button" />
+    turns.map((turn, index) => (
+      <button
+        class={`js-game-play game__play--btn ${turn} empty`}
+        type="button"
+        aria-label={labels[index]}
+        data-player=""
+      />
     ))
   }
+  <p class="visually-hidden js-sr-click-button" aria-live="polite"></p>
 </div>
 
 <style lang="scss">
@@ -31,19 +48,14 @@ const turns = Array(9).fill("x--turn");
       max-width: 8.75rem;
       aspect-ratio: 1;
 
-      & > img {
-        width: clamp(2.5rem, -0.9286rem + 17.1429vw, 4rem);
-        height: clamp(2.5rem, -0.9286rem + 17.1429vw, 4rem);
-      }
-
-      &.x--turn:is(:hover, :focus) {
+      &.x--turn:not(:disabled):is(:hover, :focus) {
         background-image: url(/assets/images/icon-x-outline.svg);
         background-repeat: no-repeat;
         background-position: center;
         background-size: clamp(2.5rem, -0.9286rem + 17.1429vw, 4rem)
           clamp(2.5rem, -0.9286rem + 17.1429vw, 4rem);
       }
-      &.o--turn:is(:hover, :focus) {
+      &.o--turn:not(:disabled):is(:hover, :focus) {
         background-image: url(/assets/images/icon-o-outline.svg);
         background-repeat: no-repeat;
         background-position: center;
@@ -65,6 +77,35 @@ const turns = Array(9).fill("x--turn");
         outline: 2px solid $color-accent-400;
         outline-offset: 4px;
       }
+
+      &.win-x {
+        background-color: $color-primary-400;
+      }
+      &.win-o {
+        background-color: $color-accent-400;
+      }
+    }
+  }
+</style>
+<style lang="scss" is:global>
+  @use "../styles/abstracts/" as *;
+
+  .game__play--btn {
+    & > img {
+      width: clamp(2.5rem, -0.9286rem + 17.1429vw, 4rem);
+      height: clamp(2.5rem, -0.9286rem + 17.1429vw, 4rem);
+    }
+  }
+
+  .win-x {
+    & > img {
+      filter: hue-rotate(202deg) saturate(32.5%) brightness(15.1%);
+    }
+  }
+
+  .win-o {
+    & > img {
+      filter: hue-rotate(202deg) saturate(32.5%) brightness(15.1%);
     }
   }
 </style>
