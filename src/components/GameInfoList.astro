@@ -3,9 +3,27 @@ import GameInfo from "./GameInfo.astro";
 ---
 
 <div class="game__info--wrapper">
-  <GameInfo type="x" label="X (You)" score="0" />
-  <GameInfo type="ties" label="Ties" score="0" />
-  <GameInfo type="o" label="O (CPU)" score="0" />
+  <GameInfo
+    type="x"
+    label="X (You)"
+    labelClass="js-player-x-label"
+    score="0"
+    scoreClass="js-player-x-score"
+  />
+  <GameInfo
+    type="ties"
+    label="Ties"
+    labelClass=""
+    score="0"
+    scoreClass="js-ties-count"
+  />
+  <GameInfo
+    labelClass="js-player-o-label"
+    type="o"
+    label="O (CPU)"
+    score="0"
+    scoreClass="js-player-o-score"
+  />
 </div>
 
 <style lang="scss">
