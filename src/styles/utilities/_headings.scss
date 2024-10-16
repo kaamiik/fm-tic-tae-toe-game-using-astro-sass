@@ -14,7 +14,7 @@
     $heading-1-color-o
   );
 }
-.heading-1-restart {
+.heading-1-default {
   @include heading(
     $heading-1-font-size,
     $heading-1-letter-spacing,
