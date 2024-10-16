@@ -1,14 +1,11 @@
 ---
-const { hidden = false } = Astro.props;
-const className = `new-game js-new-game ${hidden ? "hidden" : ""}`;
-
 import Icons from "../components/Icons.astro";
 import PlayerMarkPicker from "../components/PlayerMarkPicker.astro";
 import Button from "../components/Button.astro";
 ---
 
 <div class="container">
-  <div class={className} aria-labelledby="setub-heading">
+  <div class="new-game js-new-game" aria-labelledby="setub-heading">
     <Icons />
 
     <PlayerMarkPicker />
