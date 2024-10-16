@@ -1,7 +1,4 @@
 ---
-const { hidden = true } = Astro.props;
-const className = `js-game ${hidden ? "hidden" : ""}`;
-
 import Icons from "./Icons.astro";
 import GameTurn from "./GameTurn.astro";
 import Button from "./Button.astro";
@@ -9,8 +6,8 @@ import GamePlay from "./GamePlay.astro";
 import GameInfoList from "./GameInfoList.astro";
 ---
 
-<div class="container">
-  <div class={className}>
+<div class="container hidden">
+  <div class="game js-game">
     <div class="game__header">
       <Icons />
       <GameTurn />
@@ -35,7 +32,7 @@ import GameInfoList from "./GameInfoList.astro";
   </div>
 </div>
 <dialog class="dialog-restart js-dialog-restart">
-  <p class="heading-1-restart text-center">Restart game?</p>
+  <p class="heading-1-default text-center">Restart game?</p>
   <div class="dialog-restart__buttons">
     <Button
       theme="secondary"
@@ -46,6 +43,52 @@ import GameInfoList from "./GameInfoList.astro";
       theme="secondary"
       themeNumber="one"
       customJsClass="js-confirm-restart">Yes, restart</Button
+    >
+  </div>
+</dialog>
+<dialog class="dialog-o-wins js-dialog-o-wins">
+  <p class="js-dialog-o-your-result heading-4 text-center"></p>
+  <p class="visually-hidden js-dialog-sr" aria-live="polite"></p>
+  <p class="dialog-o-wins__heading | heading-1-o margin-block-start-4">
+    <img src="/assets/images/icon-o.svg" alt="" />
+    <span class="visually-hidden">Player o</span>
+    Takes the round
+  </p>
+  <div class="dialog-o-wins__buttons">
+    <Button theme="secondary" themeNumber="two" customJsClass="js-quit"
+      >Quit</Button
+    >
+    <Button theme="secondary" themeNumber="one" customJsClass="js-next-round"
+      >Next round</Button
+    >
+  </div>
+</dialog>
+<dialog class="dialog-x-wins js-dialog-x-wins">
+  <p class="js-dialog-x-your-result heading-4 text-center"></p>
+  <p class="visually-hidden js-dialog-sr" aria-live="polite"></p>
+  <p class="dialog-x-wins__heading | heading-1-x margin-block-start-4">
+    <img src="/assets/images/icon-x.svg" alt="" />
+    <span class="visually-hidden">player x</span>
+    Takes the round
+  </p>
+  <div class="dialog-x-wins__buttons">
+    <Button theme="secondary" themeNumber="two" customJsClass="js-quit"
+      >Quit</Button
+    >
+    <Button theme="secondary" themeNumber="one" customJsClass="js-next-round"
+      >Next round</Button
+    >
+  </div>
+</dialog>
+<dialog class="dialog-ties js-dialog-ties">
+  <p class="heading-1-default text-center">Round tied</p>
+  <p class="visually-hidden js-dialog-sr" aria-live="polite"></p>
+  <div class="dialog-ties__buttons">
+    <Button theme="secondary" themeNumber="two" customJsClass="js-quit"
+      >Quit</Button
+    >
+    <Button theme="secondary" themeNumber="one" customJsClass="js-next-round"
+      >Next round</Button
     >
   </div>
 </dialog>
@@ -84,16 +127,101 @@ import GameInfoList from "./GameInfoList.astro";
     }
   }
 
-  .dialog-restart {
+  dialog {
     border: 0;
     background-color: $color-neutral-800;
     max-width: 100%;
-    padding: 4.1875rem 0;
     width: 100%;
 
     &::backdrop {
       background-color: #000000;
       opacity: 50%;
+    }
+  }
+
+  .dialog-restart {
+    padding: 3.8125rem 0;
+
+    @include mq(medium) {
+      padding: 4.1875rem 0;
+    }
+
+    &__buttons {
+      margin-block-start: $size-8;
+      display: flex;
+      gap: $size-4;
+      justify-content: center;
+    }
+  }
+
+  .dialog-o-wins {
+    padding: 2.8125rem 0;
+
+    &__heading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: $size-2;
+
+      @include mq(medium) {
+        gap: $size-6;
+      }
+
+      & > img {
+        width: 30px;
+        height: 30px;
+
+        @include mq(medium) {
+          width: 64px;
+          height: 64px;
+        }
+      }
+    }
+
+    &__buttons {
+      margin-block-start: $size-6;
+      display: flex;
+      gap: $size-4;
+      justify-content: center;
+    }
+  }
+  .dialog-x-wins {
+    padding: 2.8125rem 0;
+
+    &__heading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: $size-2;
+
+      @include mq(medium) {
+        gap: $size-6;
+      }
+
+      & > img {
+        width: 30px;
+        height: 30px;
+
+        @include mq(medium) {
+          width: 64px;
+          height: 64px;
+        }
+      }
+    }
+
+    &__buttons {
+      margin-block-start: $size-6;
+      display: flex;
+      gap: $size-4;
+      justify-content: center;
+    }
+  }
+
+  .dialog-ties {
+    padding: 3.8125rem 0;
+
+    @include mq(medium) {
+      padding: 4.1875rem 0;
     }
 
     &__buttons {
