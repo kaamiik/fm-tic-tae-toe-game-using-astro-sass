@@ -54,6 +54,11 @@ const buttonClasses = `button button--${theme} button--${theme}-${themeNumber} $
     &:is(:hover, :focus) {
       background-color: $button-primary-one-background-hover;
     }
+
+    &:focus {
+      outline: 4px dashed white;
+      outline-offset: 4px;
+    }
   }
 
   // Specific styles for primary-two
@@ -64,6 +69,11 @@ const buttonClasses = `button button--${theme} button--${theme}-${themeNumber} $
 
     &:is(:hover, :focus) {
       background-color: $button-primary-two-background-hover;
+    }
+
+    &:focus {
+      outline: 4px dashed white;
+      outline-offset: 4px;
     }
   }
 
@@ -76,6 +86,11 @@ const buttonClasses = `button button--${theme} button--${theme}-${themeNumber} $
     &:is(:hover, :focus) {
       background-color: $button-secondary-one-background-hover;
     }
+
+    &:focus {
+      outline: 4px dashed white;
+      outline-offset: 4px;
+    }
   }
 
   // Specific styles for secondary-two
@@ -86,6 +101,11 @@ const buttonClasses = `button button--${theme} button--${theme}-${themeNumber} $
 
     &:is(:hover, :focus) {
       background-color: $button-secondary-two-background-hover;
+    }
+
+    &:focus {
+      outline: 4px dashed white;
+      outline-offset: 4px;
     }
   }
 </style>
