@@ -1,10 +1,12 @@
 ---
-const { type, label, score } = Astro.props;
+const { type, label, labelClass, score, scoreClass } = Astro.props;
+const classNameLabel = `${labelClass} fs-300 clr-neutral-900 text-center`;
+const classNameScore = `${scoreClass} heading-2 text-center`;
 ---
 
 <div class={`game__info game__info--${type}`}>
-  <p class="fs-300 clr-neutral-900 text-center">{label}</p>
-  <p class="heading-2 text-center">{score}</p>
+  <p class=`${classNameLabel}`>{label}</p>
+  <p class=`${classNameScore}`>{score}</p>
 </div>
 
 <style lang="scss">
